@@ -55,7 +55,7 @@ public struct JsonUserDefault<Value> where Value : Codable{
     var store : UserDefaults
     var key : String
     var defaultValue : Value
-    init(storeIn : UserDefaults, withKey: String, defaults: Value){
+    public init(storeIn : UserDefaults, withKey: String, defaults: Value){
         self.store = storeIn
         self.key = withKey
         self.defaultValue = defaults
@@ -78,7 +78,7 @@ public struct NSKeyedUnarchivedUserDefault<NSCodingType> where NSCodingType : NS
     var store : UserDefaults
     var key : String
     var defaultValue : Optional<NSCodingType>
-    init(storeIn : UserDefaults, withKey: String, defaults: NSCodingType?){
+    public init(storeIn : UserDefaults, withKey: String, defaults: NSCodingType?){
         self.store = storeIn
         self.key = withKey
         self.defaultValue = defaults
