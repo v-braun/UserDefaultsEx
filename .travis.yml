@@ -1,13 +1,10 @@
-language: objective-c
-
-# if test available use this config istead of a custom script
-xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
-xcode_project: <%= name %>.xcodeproj 
-# or use 
-# xcode_workspace: <%= name %>.xcworkspace 
-
-#xcode_scheme: <%= name %>
-
-# script:
-#   - xcodebuild -scheme <%= name %> -workspace <%= name %>.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6S,OS=12.1' build
-
+os:
+  - osx
+language: swift
+osx_image: xcode11
+env:
+  - PROJECT_NAME=<%= name %>
+install: (cd $PROJECT_NAME && swift package update)
+script:
+  - (cd $PROJECT_NAME && swift build)
+  - (cd $PROJECT_NAME && swift test)
