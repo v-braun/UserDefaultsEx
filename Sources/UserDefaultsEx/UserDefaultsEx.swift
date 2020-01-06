@@ -61,7 +61,7 @@ public struct JsonUserDefault<Value> where Value : Codable{
         self.defaultValue = defaults
     }
     
-    var wrappedValue: Value {
+    public var wrappedValue: Value {
         get {
             let val : Value? = self.store.getCodable(key: self.key)
             guard let result = val else {return self.defaultValue}
@@ -85,7 +85,7 @@ public struct NSKeyedUnarchivedUserDefault<NSCodingType> where NSCodingType : NS
     }
 
     @available(OSX 10.13, *)
-    var wrappedValue: NSCodingType? {
+    public var wrappedValue: NSCodingType? {
         get {
             let val : NSCodingType? = self.store.getKeyedArchiver(key: self.key)
             guard let result = val else {return self.defaultValue}
