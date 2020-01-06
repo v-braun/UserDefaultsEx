@@ -51,7 +51,7 @@ extension UserDefaults{
 
 
 @propertyWrapper
-struct JsonUserDefault<Value> where Value : Codable{
+public struct JsonUserDefault<Value> where Value : Codable{
     var store : UserDefaults
     var key : String
     var defaultValue : Value
@@ -74,7 +74,7 @@ struct JsonUserDefault<Value> where Value : Codable{
 }
 
 @propertyWrapper
-struct NSKeyedUnarchivedUserDefault<NSCodingType> where NSCodingType : NSObject, NSCodingType : NSCoding{
+public struct NSKeyedUnarchivedUserDefault<NSCodingType> where NSCodingType : NSObject, NSCodingType : NSCoding{
     var store : UserDefaults
     var key : String
     var defaultValue : Optional<NSCodingType>
