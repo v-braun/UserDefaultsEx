@@ -5,23 +5,25 @@ extension UserDefaults{
     /// Use the NSKeyedArchiver to archive the given value and set it into the UserDefaults by the given key
     @available(OSX 10.13, *)
     public func setKeyedArchiver<T>(value: T?, key: String){
-        if let val = value {
-            let data = try? NSKeyedArchiver.archivedData(withRootObject: val, requiringSecureCoding: false)
+        if value == nil {
+            self.removeObject(forKey: key)
+        }
+        else {
+            let data = try? NSKeyedArchiver.archivedData(withRootObject: value!, requiringSecureCoding: false)
             if data != nil{
                 self.set(data, forKey: key)
             }
-        } else{
-            self.removeObject(forKey: key)
         }
     }
-    
+        
     /// Get the value by the provided key and use the NSKeyedUnarchiver to unarchive the value (if not nil)
     @available(OSX 10.13, *)
     public func getKeyedArchiver<T>(key: String) -> T? where T : NSObject, T : NSCoding {
-        let data = self.object(forKey: key) as? Data
-        if data == nil { return nil }
+        let d1 = self.object(forKey: key) as? Data
+        guard let d2 = d1 else { return nil }
         
-        let result = try? NSKeyedUnarchiver.unarchivedObject(ofClass: T.self, from: data!)
+        guard let unarchived = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(d2) else { return nil }
+        let result = unarchived as? T
         return result
     }
     
